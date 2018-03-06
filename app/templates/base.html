@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- dynamic title -->
+    {% if title %}
+        <title>{{ title }} - Medium</title>
+    {% else %}
+        <title>Welcome to the Medium</title>
+    {% endif %}
+    <!-- ends dynamic title -->
+    <link rel='stylesheet' href="{{url_for('static', filename='./css/bootstrap.css.map')}}">
+    <link rel='stylesheet' href="{{url_for('static', filename='./css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='./fonts/glyphicons-halflings-regular.svg')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='./css/styles.css')}}">
+
+</head>
+<body>
+
+    {% block body %}
+
+    <div class="container">
+
+    <header>
+        {% include 'includes/_navbar.html' %}
+    </header>
+
+    {% block content %}
+        {% include 'includes/_messages.html' %}
+            
+    {% endblock %}
+    
+    </div>
+    {% endblock %}
+
+    <script src="{{url_for('static', filename='./js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='./js/bootstrap.js')}}"></script>
+
+</body>
+</html>
