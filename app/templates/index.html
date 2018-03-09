@@ -1,9 +1,78 @@
 {% extends 'base.html' %}
 
     {% block content %}
-        <h1> Hi, Welcome!</h1>
-            <div><p>
-                    <strong>This is medium.com</strong>
-                </p>
+    <div id="homepage-feature" class="container carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#homepage-feature" data-slide-to="0" class="active"></li>
+            <li data-target="#homepage-feature" data-slide-to="1"></li>
+            <li data-target="#homepage-feature" data-slide-to="2"></li>
+            <li data-target="#homepage-feature" data-slide-to="3"></li>
+            <li data-target="#homepage-feature" data-slide-to="4"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="{{url_for('static', filename = "./img/soft.jpg")}}" alt="sotware development">
             </div>
+            <div class="item">
+                <img src="{{url_for('static', filename = "./img/Social-Life-2.jpg")}}" alt="social life 2">
+            </div>
+            <div class="item">
+                <img src="{{url_for('static', filename = "./img/python-logo.png")}}" alt="python logo">
+            </div>
+            <div class="item">
+                <img src="{{url_for('static', filename = "./img/social-school.jpg")}}" alt="social school">
+            </div>
+            <div class="item">
+                <img src="{{url_for('static', filename = "./img/SoberSocializing.jpg")}}" alt="sober socializing">
+            </div>
+        </div><!-- /.carousel-inner -->
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#homepage-feature" dataslide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#homepage-feature" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div><!-- /#homepage-feature.carousel -->
+
+    <section id="about">
+        <div class="container row">
+            <div class="col-xs-12 col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Primary</h1>
+                    </div>
+                    <div class="panel-body">
+                        Sed ut perspiciatis unde omnis iste natus error 
+                        sit voluptatem accusantium doloremque laudantium.
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Primary</h1>
+                    </div>
+                    <div class="panel-body">
+                        Sed ut perspiciatis unde omnis iste natus error 
+                        sit voluptatem accusantium doloremque laudantium.
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Primary</h1>
+                    </div>
+                    <div class="panel-body">
+                        Sed ut perspiciatis unde omnis iste natus error 
+                        sit voluptatem accusantium doloremque laudantium.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     {% endblock %}
