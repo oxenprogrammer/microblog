@@ -26,7 +26,7 @@ class UserModelCase(unittest.TestCase):
 
     def test_follow(self):
         u1 = User(username='john', email='john@example.com')
-        u2 = User(username='susan', email='susan@example.com')
+        u2 = User(username='susan', email='susan@gmail.com')
         db.session.add(u1)
         db.session.add(u2)
         db.session.commit()
