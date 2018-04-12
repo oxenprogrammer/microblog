@@ -1,36 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1 class="lead">Sign In</h1>
-    <form class="form-horizontal" action="" method="POST">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.remember_me() }}
-            {{ form.remember_me.label }}
-        </p>
-        <p>
-            {{ form.submit() }}
-        </p>
-    </form>
-    <p>
-        Forgot Your Password?
-        <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
-    </p>
-    <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
-</div>
+<body class="my-login-page">
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="brand">
+                        <img src="{{url_for('static', filename='./img/Jazz_logo.png')}}" width="100" height="100">
+                    </div>
+                    <div class="card fat">
+                        <div class="card-body">
+                            <h4 class="card-title">Login</h4>
+                                <form class="form-horizontal" action="" method="POST">
+                                    {{ form.hidden_tag() }}
+                                    <div class="form-group">
+                                        <label for="email">Username</label>
+    
+                                        <input id="username" type="text" class="form-control" name="username" value="{{request.form.username}}" required autofocus>
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label for="password">Password
+                                        </label>
+                                        <input id="password" type="password" class="form-control" name="password" value="{{request.form.password}}" required data-eye>
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label>
+                                            <input type="checkbox" name="remember_me" value="{{request.form.remember_me}}"> Remember Me
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                                <div>Forgot Your Password?
+                                    <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
+                                </div>
+                                <div>
+                                    New User? <a href="{{ url_for('register') }}">Click to Register!</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+</body>
+                   
 {% endblock %}

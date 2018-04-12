@@ -1,39 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="lead">Register</h1>
-        <form action="" method="POST" class="form-horizontal">
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.username.label }}<br>
-                {{ form.username(size=32)}}<br>
-                {% for error in form.username.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.email.label }}<br>
-                {{ form.email(size=32)}}<br>
-                {% for error in form.email.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.password.label }}<br>
-                {{ form.password(size=32)}}<br>
-                {% for error in form.password.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.confirm_password.label }}<br>
-                {{ form.confirm_password(size=32)}}<br>
-                {% for error in form.confirm_password.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </p>
-            <p>{{ form.submit() }}</p>
-        </form>
-    </div>
+<body class="my-login-page">
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-md-center h-100">
+                <div class="card-wrapper">
+                    <div class="brand">
+                        <img src="{{url_for('static', filename='./img/Jazz_logo.png' )}}" width='100' height='100'>
+                    </div>
+                    <div class="card fat">
+                        <div class="card-body">
+                            <h4 class="card-title">Register</h4>
+                                <form action="" method="POST" class="form-horizontal">
+                                    {{ form.hidden_tag() }}
+                                    {% from 'includes/_formhelpers.html' import render_field %}
+                            
+                                    <div class="form-group">
+                                        {{ render_field(form.username, class_='form-control')}}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.email, class_='form-control')}}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.password, class_='form-control')}}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.confirm_password, class_='form-control')}}
+                                    </div>
+                                    <p><input type="submit" class="btn btn-primary" value="REGISTER"></p>
+
+                                </form>
+                            <div class="margin-top20 text-center">
+                                Already have an account? <a href="{{url_for('login')}}">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </section>       
+</body>
+                           
 {% endblock %}
