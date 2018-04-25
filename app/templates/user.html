@@ -1,29 +1,161 @@
 {% extends 'base.html' %}
 
 {% block  content %}
-    <div class="container">
-        <table>
-            <tr valign="top">
-                <td><img src="{{ user.avatar(128) }}"></td>
-                <td><h1>User: {{ user.username }}</h1></td>
-                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-                {% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}
+<section id='main'>
+        <ul id="account-tabs" class="nav nav-tabs justify-content-center">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#" data-toggle="tab"><i class="fa fa-envelope-o"></i>Message</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#" data-toggle="tab"><i class="fa fa-bell-o"></i>Notification</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#tab-pane-content" data-toggle="collapse"><i class="fa fa-user-o"></i>Update My Profile</a>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="offset-4 col-sm-7">
+                <div class="tab-content collapse" id='tab-pane-content'>
+                    <div role="tabpanel" class="tab-pane" id="account-message">
+                    Message tab pane
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="account-notification">
+                        Notification tab pane
+                    </div>
+                    <div role="tabpanel" class="tab-pane active" id="account-user" >
+                        <form class="form-horizontal user-form border border-primary">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-3 control-label">Username</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="username" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-3 control-label">About Me</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" name="about"  value=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="offset-3 col-sm-9">
+                                        <button type="submit" class="btn btn-success">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div id="profile-resume" class="card">
+                <img class="card-img-top img-responsive" src="{{url_for('static', filename='./img/happycoding.jpg')}}">
+                <div class="card-block">
+                    <img src="{{user.avatar(128)}}" class="card-img">
+                    <h4 class="card-title">{{user.username}}<small></small></h4>
+                    <p class="card-text ml-3">{% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}</p>
+                    <p class="card-text ml-3">{% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}</p>
+                    <ul class="list-inline list-unstyled ml-3 pff">
+                        <li id="card-tweets">
+                        <a href="#">
+                            <span class="profile-stats">Posts</span>
             
-                <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
-                {% if user == current_user %}
-                <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
-                {% elif not current_user.is_following(user) %}
-                <p><a href="{{ url_for('follow', username=user.username) }}">Follow</a></p>
-                {% else %}
-                <p><a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a></p>
-                {% endif %}
-            </tr>
-        </table>
-        <hr>
+                        </a>
+                        </li>
+                        <hr>
+                        <li class="card-followers">
+                            <a href="#">
+                            <span class="profile-stats">{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</span>
+                
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-        {% for post in posts %}
-            {% include 'includes/_post.html' %}
-        {% endfor %}
+            <div id="app-info" class="card text-center mt-3 p-3">
+                <div class="card-block">
+                    © 2018 Maker Space
+                    <ul class="list-unstyled list-inline">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Terms and Privacy</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="#">Connect other address book</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="main" class="col-12 col-md-7">
+            <div id="main-card" class="card">
+                <form id="new-message">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="What is happening?">
+                    </div>
+                </form>
+            <ul id="feed" class="list-unstyled m-4">   
+                {% for post in posts %}
+                <li>
+                    <img src="{{ post.author.avatar(36) }}" class="feed-avatar img-circle">
+                    <div class="feed-post">
+                        <h5> <small class="username">{{ post.author.username }}</small></h5>
+                        <p class="post p-2">{{ post.body }}</p>
+                    </div>
+                    <div class="action-list m-2">
+                        <a href="#">
+                            <span class="fa fa-share-alt" aria-hidden="true"></span>
+                        </a>
+                        <a href="#">
+                            <span class="fa fa-refresh " aria-hidden="true"></span>
+                            <span class="retweet-count">6</span>
+                        </a>
+                        <a href="#">
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            </div>
+
+            <nav class="text-center pag">
+                <ul class="pagination pagination-lg justify-content-center">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" ripple-radius aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" ripple-radius>1 <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="page-item" ><a class="page-link" ripple-radius>2</a></li>
+                  <li class="page-item" ><a class="page-link" ripple-radius>3</a></li>
+                  <li class="page-item" ><a class="page-link" ripple-radius>4</a></li>
+                  <li class="page-item" ><a class="page-link" ripple-radius>5</a></li>
+                  <li class="page-item" >
+                    <a class="page-link" ripple-radius aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
+        </div>
+
+    </div>
+</section>
 
 
     </div>
