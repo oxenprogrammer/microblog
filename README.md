@@ -30,3 +30,6 @@ flask run
 To now view the application head over to
 
 http://l27.0.0.1:5000
+
+on heroku https://emmisteel.herokuapp.com 
+NB: remember to click remember me when logging in as there is still a bug in there. everything is still a work in progress
